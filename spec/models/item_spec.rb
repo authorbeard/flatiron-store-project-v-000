@@ -17,7 +17,6 @@ RSpec.describe Item, :type => :model do
       @line_item = @item.line_items.create(quantity: 1, cart: @cart)
     end
 
-##NOTE TO SELF: SQL Group-by prob necessary here
     it 'has many line_items consolidated by line_item quantity' do 
       expect(@item.line_items.first.quantity).to eq(1)
     end

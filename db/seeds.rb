@@ -13,3 +13,7 @@ Item.all.each do |item|
   item.save
   counter += 1
 end
+
+10.times do
+  FactoryGirl.create(:user)
+end

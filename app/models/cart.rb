@@ -4,6 +4,11 @@ class Cart < ActiveRecord::Base
   has_many :items, through: :line_items
 
   enum status: [:current, :submitted]
+  before_create :set_default_status
+
+  def set_default_status
+    self.status="current"
+  end
 
   ## method to calculate total:
   ## Would grab line-items and multiply quantity by price
