@@ -14,14 +14,14 @@ class Cart < ActiveRecord::Base
     line_items.collect{|l| l.subtotal}.reduce(:+)
   end 
 
-  def add_item(item_id, quantity=1)
+  def add_item(item_id, new_quantity=1)
     if line_items.find_by(item_id: item_id) 
       item_add=line_items.find_by(item_id: item_id)
-      item_add.quantity+=quantity
+      item_add.quantity+=new_quantity
       item_add
     else
 # binding.pry
-      line_items.build(item_id: item_id, quantity: quantity)
+      line_items.build(item_id: item_id, quantity: new_quantity)
 # binding.pry
     end
   end
