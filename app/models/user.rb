@@ -15,5 +15,18 @@ class User < ActiveRecord::Base
   def current_cart
     self.carts.detect{|c| c.status == "current"}
   end
+
+
+  private
+    def self.seed_helper
+      all.each do |u|
+        c = Cart.create
+        c.line_items.build(item_id: u.id, quantity: (11-u.id))
+        u.carts << c
+        u.save
+      end 
+    end
   
 end
+
+

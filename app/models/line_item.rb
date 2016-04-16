@@ -9,4 +9,8 @@ class LineItem < ActiveRecord::Base
   def set_default
     self.quantity||=1
   end
+
+  def subtotal
+    item.price * quantity
+  end
 end

@@ -17,3 +17,10 @@ end
 10.times do
   FactoryGirl.create(:user)
 end
+
+# User.all.each do |u|
+#   c = Cart.create
+#   c.line_items.build(item_id: u.id, quantity: (11-u.id))
+#   u.carts << c
+#   u.save
+# end 
