@@ -1,8 +1,20 @@
-<nav class="">
-    <ul>
-        <li> <%= link_to "Store Home", store_path %> </li>
-        <% if !!@cart %>
-          <li> <%= link_to "Cart", cart_path(current_cart) %></li>
-        <% end %>
-    </ul>
+<nav class="store-header">
+  <h5 align="right"><%= "Signed in as #{current_user.email}" if current_user %><h5>
+  <ul>
+      <li> <%= link_to "Store Home", store_path %> </li>
+      <% if !!@cart %>
+        <li> <%= link_to "Cart", cart_path(current_cart) %></li>
+      <% end %>
+  </ul>
+
+  <ul>
+    <% if user_signed_in? %> 
+      <li><%= link_to "Sign out", signout_path %></li>
+    <% else %>
+      <li> <%= link_to "Sign in", signin_path %></li>
+    <% end %>
+      <li> <%= link_to "Sign up", user_registration_path %></li>
+  </ul>
 </nav>
+
+

@@ -1,7 +1,13 @@
 Rails.application.routes.draw do
 
   devise_for :users
+  as :user do
+    get "/signin" => "devise/sessions#new"
+    get "/signout" => "devise/sessions#destroy"
+  end
+
   get 'users/show'
+
 
   root 'store#index', as: 'store'
 

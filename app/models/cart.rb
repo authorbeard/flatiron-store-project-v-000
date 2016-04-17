@@ -20,14 +20,8 @@ class Cart < ActiveRecord::Base
       item_add.quantity+=new_quantity
       item_add
     else
-# binding.pry
       line_items.build(item_id: item_id, quantity: new_quantity)
-# binding.pry
     end
   end
 end
 
-=begin
-@cart.line_items.build(item_id: second_item.id)
-
-=end
