@@ -3,7 +3,7 @@
 <% end %>
 
 <div class="user-cart">
-<%= link_to "Cart", cart_path(current_user.current_cart) if current_user.current_cart %>
+<%= link_to "Cart", cart_path(current_user.current_cart) if user_signed_in? && current_user.current_cart %>
 </div>
 
 <% @items.each do |item| %>

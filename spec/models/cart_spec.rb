@@ -26,7 +26,6 @@ RSpec.describe Cart, :type => :model do
   describe "#add_item" do
     it 'creates a new unsaved line_item for new item' do
       second_item = Item.second
-  # binding.pry
       second_line_item = @cart.add_item(second_item.id)
       expect(second_line_item.new_record?).to be_truthy
     end
@@ -39,7 +38,7 @@ RSpec.describe Cart, :type => :model do
       expect(second_line_item.cart_id).to eq(@cart.id)
     end
 
-    it 'updates existing line_item instead of making new when adding same item' do 
+    it 'updates existing line_item instead of making new when adding same item' do      
       @line_item2 = @cart.add_item(@item.id)
       @line_item2.save
       expect(@line_item.id).to eq(@line_item2.id)

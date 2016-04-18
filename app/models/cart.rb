@@ -14,25 +14,18 @@ class Cart < ActiveRecord::Base
     line_items.collect{|l| l.subtotal}.reduce(:+)
   end 
 
-  def add_item(item_id, new_quantity=1)
-# binding.pry
+  def add_item(item_id)
     if id.nil?
       self.save
       line_items.create(item_id: item_id)
       self.save
     else
-# binding.pry
       if has_item?(item_id)
-binding.pry
-        q=line_items.find_by(item_id: item_id).quantity+=new_quantity
-        line_items.find_by(item_id: item_id).update(quantity: q)
+        update_quantity(item_id)
       else
-        line_items.create(item_id: item_id)
+        line_items.build(item_id: item_id, quantity: 1)
       end
-
-      
     end
-
   end
 
   def checkout
@@ -41,12 +34,18 @@ binding.pry
       li.item.save
     }
     self.status="submitted"
-# binding.pry
     self.save
   end
 
   def has_item?(item_id)
     items.include?(Item.find(item_id))
+  end
+
+  def update_quantity(item_id)
+    li=line_items.find_by(item_id: item_id)
+    q=li.quantity+=1
+    li.update(quantity: q)
+    li
   end
 
 
