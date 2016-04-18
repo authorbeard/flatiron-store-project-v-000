@@ -8,9 +8,6 @@ class User < ActiveRecord::Base
   has_many :carts
   has_many :line_items, through: :carts
 
-  ## Prob. delegate items/categories and so on
-  ## This must be where orders come in. 
-
 
   def current_cart
     self.carts.detect{|c| c.status == "current"}
