@@ -19,15 +19,16 @@ class CartsController < ApplicationController
 
   def checkout
 # binding.pry
-    cart=current_user.current_cart
-    cart.checkout
-    redirect_to cart_path(cart)
+    set_cart
+    @cart.checkout
+    redirect_to cart_path(@cart)
   end
 
   def destroy
   end
 
-  
+
+
 
 
 end

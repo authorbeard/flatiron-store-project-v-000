@@ -1,10 +1,9 @@
 <nav class="store-header">
   <div class="signed-in">
-    <% if user_signed_in? %>
       <h5><%= "Signed in as #{current_user.email}" if current_user %><h5>
-      <%= link_to "See my cart", carts_path %>
-    <% end %>
+
   </div>
+  
   <ul>
       <li> <%= link_to "Store Home", store_path %> </li>
   </ul>

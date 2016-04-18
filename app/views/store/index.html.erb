@@ -2,6 +2,10 @@
   <%= link_to category.title, category_path(category) %>
 <% end %>
 
+<div class="user-cart">
+<%= link_to "Cart", cart_path(current_user.current_cart) if current_user.current_cart %>
+</div>
+
 <% @items.each do |item| %>
   <p><%= item.title %> | <%= number_to_currency(item.price/100) %> | <%= button_to 'Add to Cart', line_items_path(item_id: item) if user_signed_in? %></p>
 <% end %>

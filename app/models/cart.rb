@@ -7,7 +7,7 @@ class Cart < ActiveRecord::Base
   before_create :set_default_status
 
   def set_default_status
-    self.status="current"
+    self.status||="current"
   end
 
   def total
@@ -15,13 +15,24 @@ class Cart < ActiveRecord::Base
   end 
 
   def add_item(item_id, new_quantity=1)
-    if line_items.find_by(item_id: item_id) 
-      item_add=line_items.find_by(item_id: item_id)
-      item_add.quantity+=new_quantity
-      item_add
+# binding.pry
+    if id.nil?
+      self.save
+      line_items.create(item_id: item_id)
+      self.save
     else
-      line_items.build(item_id: item_id, quantity: new_quantity)
+# binding.pry
+      if has_item?(item_id)
+binding.pry
+        q=line_items.find_by(item_id: item_id).quantity+=new_quantity
+        line_items.find_by(item_id: item_id).update(quantity: q)
+      else
+        line_items.create(item_id: item_id)
+      end
+
+      
     end
+
   end
 
   def checkout
@@ -30,7 +41,14 @@ class Cart < ActiveRecord::Base
       li.item.save
     }
     self.status="submitted"
+# binding.pry
     self.save
   end
+
+  def has_item?(item_id)
+    items.include?(Item.find(item_id))
+  end
+
+
 end
 
